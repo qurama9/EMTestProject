@@ -34,6 +34,7 @@
 		91652A2D2DB474FB00965154 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91652A0C2DB287BD00965154 /* APIService.swift */; };
 		91652A352DB5144100965154 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91652A262DB4727500965154 /* MockURLProtocol.swift */; };
 		91652A362DB5185A00965154 /* MockTaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91652A2A2DB4735B00965154 /* MockTaskRepository.swift */; };
+		91652A3B2DB6FA9E00965154 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91652A3A2DB6FA9E00965154 /* ContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		91652A262DB4727500965154 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		91652A282DB4729200965154 /* MockAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIService.swift; sourceTree = "<group>"; };
 		91652A2A2DB4735B00965154 /* MockTaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTaskRepository.swift; sourceTree = "<group>"; };
+		91652A3A2DB6FA9E00965154 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				916529DC2D9868AC00965154 /* TaskList */,
 				916529DD2D9868CA00965154 /* AddTask */,
 				916529E42D987E6800965154 /* EditView */,
+				91652A3A2DB6FA9E00965154 /* ContainerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91652A3B2DB6FA9E00965154 /* ContainerView.swift in Sources */,
 				91652A362DB5185A00965154 /* MockTaskRepository.swift in Sources */,
 				91652A0D2DB287BD00965154 /* APIService.swift in Sources */,
 				91652A052DB03F0F00965154 /* TaskDataModel.xcdatamodeld in Sources */,
@@ -550,7 +554,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ToDoApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 2QG4G6RVQ9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -583,7 +587,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ToDoApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 2QG4G6RVQ9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

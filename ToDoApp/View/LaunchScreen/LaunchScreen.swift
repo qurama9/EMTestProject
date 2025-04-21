@@ -13,6 +13,7 @@ struct LaunchScreen: View {
             
 //            MARK: - Background Color
             LinearGradient(colors: [Color(.systemGray4), Color(.systemGray5)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                .ignoresSafeArea()
             
             
 //                MARK: - Logo

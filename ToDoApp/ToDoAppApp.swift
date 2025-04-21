@@ -10,7 +10,7 @@ struct ToDoAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContainerView()
                 .environmentObject(viewModel)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .preferredColorScheme(isDarkMode ? .dark : .light)
