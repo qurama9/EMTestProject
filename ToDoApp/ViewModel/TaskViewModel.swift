@@ -3,6 +3,8 @@ import CoreData
 import Combine
 
 class TaskViewModel: ObservableObject {
+    
+//    MARK: - Properties
     @Published var tasks: [TaskEntity] = []
     @Published var selectedTask: TaskEntity?
     @Published var searchText: String = ""
@@ -16,7 +18,7 @@ class TaskViewModel: ObservableObject {
         self.taskRepository = taskRepository
         fetchTasks()
         
-        // MARK: - Search
+        // MARK: - Search Binding
         $searchText
             .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .removeDuplicates()
@@ -26,6 +28,32 @@ class TaskViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    private func searchTasks(with searchText: String) {
+        isLoading = true
+        taskRepository.searchTasks(with: searchText) { [weak self] tasks in
+            self?.tasks = tasks
+            self?.isLoading = false
+        }
+    }
+    
+//    MARK: - Share
+    func shareTask(task: TaskEntity) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yy"
+        
+        let taskText = """
+        Задача: \(task.title ?? "")
+        Описание: \(task.taskDescription ?? "")
+        Дата: \(formatter.string(from: task.date ?? Date()))
+        """
+        
+        NotificationCenter.default.post(
+            name: NSNotification.Name("ShareTask"),
+            object: nil,
+            userInfo: ["text": taskText])
+    }
+    
+    //    MARK: - CRUD Operations
     func fetchTasks() {
         isLoading = true
         taskRepository.fetchTasks { [weak self] tasks in
@@ -87,14 +115,6 @@ class TaskViewModel: ObservableObject {
             case .failure(let error):
                 self?.errorMessage = error.localizedDescription
             }
-        }
-    }
-    
-    private func searchTasks(with searchText: String) {
-        isLoading = true
-        taskRepository.searchTasks(with: searchText) { [weak self] tasks in
-            self?.tasks = tasks
-            self?.isLoading = false
         }
     }
 }

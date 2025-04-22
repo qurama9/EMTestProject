@@ -147,12 +147,12 @@
 		916529D02D94B7E000965154 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				91652A3A2DB6FA9E00965154 /* ContainerView.swift */,
 				916529C22D94B7B300965154 /* ContentView.swift */,
 				916529F02DA522FC00965154 /* LaunchScreen */,
 				916529DC2D9868AC00965154 /* TaskList */,
 				916529DD2D9868CA00965154 /* AddTask */,
 				916529E42D987E6800965154 /* EditView */,
-				91652A3A2DB6FA9E00965154 /* ContainerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -1,9 +1,13 @@
 import SwiftUI
+import UIKit
 
 struct TaskListView: View {
+    
+//    MARK: - Properties
     @Environment(\.managedObjectContext) private var viewContext
     @State private var searchText: String = ""
     @State private var selectedTask: TaskEntity?
+    @StateObject private var viewModel = TaskViewModel()
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.date, ascending: false)],
@@ -41,12 +45,17 @@ struct TaskListView: View {
 //                        MARK: Task List
                         List {
                             ForEach(filteredTasks) { task in
-                                TaskRow(model: task) {
+                                TaskRow(
+                                    model: task,
+                                    action: {
                                     withAnimation {
                                         task.isCompleted.toggle()
                                         try? viewContext.save()
                                     }
-                                }
+                                },
+                                    selectedTask: $selectedTask,
+                                    viewModel: viewModel
+                                    )
                                 .onTapGesture {
                                     selectedTask = task
                                 }
@@ -57,6 +66,18 @@ struct TaskListView: View {
                         .sheet(item: $selectedTask) { taskToEdit in
                             TaskEditView(task: taskToEdit)
                                 .id(taskToEdit.objectID)
+                        }
+                        
+//                        MARK: - Share View
+                        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("ShareTask"))) { notification in
+                            if let text = notification.userInfo?["text"] as? String {
+                                let av = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+                                
+                                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                                   let window = windowScene.windows.first {
+                                    window.rootViewController?.present(av, animated: true, completion: nil)
+                                }
+                            }
                         }
                     }
                 }

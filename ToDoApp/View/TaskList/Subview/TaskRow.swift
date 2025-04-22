@@ -1,8 +1,12 @@
 import SwiftUI
 
 struct TaskRow: View {
+    
+//    MARK: - Properties
     var model: TaskEntity
     let action: () -> ()
+    @Binding var selectedTask: TaskEntity?
+    @ObservedObject var viewModel: TaskViewModel
     
     var body: some View {
         HStack {
@@ -45,6 +49,25 @@ struct TaskRow: View {
                     .foregroundStyle(.gray)
             }
         }
+        
+//        MARK: - Context Menu
+        .contextMenu {
+            Button {
+                selectedTask = model
+            } label: {
+                Label("Редактировать", systemImage: "square.and.pencil")
+            }
+            Button {
+                viewModel.shareTask(task: model)
+            } label: {
+                Label("Поделиться", systemImage: "square.and.arrow.up")
+            }
+            Button(role: .destructive) {
+                viewModel.deleteTask(task: model)
+            } label: {
+                Label("Удалить", systemImage: "trash")
+            }
+        }
     }
     
 //    MARK: - Methods
@@ -55,7 +78,7 @@ struct TaskRow: View {
     }
 }
 
-//MARK: - Preview
+// MARK: - Preview
 #Preview {
     let context = PersistenceController.shared.container.viewContext
     let task = TaskEntity(context: context)
@@ -63,9 +86,17 @@ struct TaskRow: View {
     task.taskDescription = "Описание задачи"
     task.isCompleted = false
     task.date = Date()
+    
+    @State var selectedTaskPreview: TaskEntity? = nil
+    let viewModel = TaskViewModel()
 
     return List {
-        TaskRow(model: task) {}
+        TaskRow(
+            model: task,
+            action: {},
+            selectedTask: .constant(nil),
+            viewModel: viewModel
+        )
     }
     .environment(\.managedObjectContext, context)
     .preferredColorScheme(.dark)
